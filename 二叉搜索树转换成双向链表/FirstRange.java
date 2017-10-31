@@ -9,48 +9,53 @@ public class FirstRange {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TreeNode treeNode = new TreeNode(10,new TreeNode(6,new TreeNode(4,null,null),new TreeNode(8,null,null)),new TreeNode(14,new TreeNode(12,null,null),new TreeNode(16,null,null)));
-		baseconvert(treeNode,null);
-		lastNode = null;
-		baseconvert(treeNode.right,null);
-		getRight(treeNode);
+		TreeNode treeNode = new TreeNode(10,new TreeNode(6,new TreeNode(4,null,null),new TreeNode(8,new TreeNode(7,null,null),new TreeNode(9,new TreeNode(31,null,null),null))),new TreeNode(14,new TreeNode(12,null,null),new TreeNode(16,null,null)));
+		convert(treeNode,null);
 		print(treeNode);
+	
 	}
 	
 	
-	public static TreeNode baseconvert(TreeNode root,TreeNode rightNode)
+	/**
+	 * ตÝน้  
+	 * @param root
+	 * @param lastNode
+	 * @return
+	 */
+	public static TreeNode convert(TreeNode root,TreeNode lastNode)
 	{
 		TreeNode currentNode = root;
-
-		if(currentNode.left != null)
+		if(currentNode == null)
 		{
-			lastNode = baseconvert(currentNode.left,currentNode.right);
+			return lastNode;
 		}
-		if(lastNode == null)
+		
+		if(currentNode.left != null && currentNode.right != null)
+		{
+			lastNode = convert(currentNode.left,lastNode);
+						
+			lastNode.left = currentNode.right;
+			
+			lastNode = convert(currentNode.right,lastNode);
+
+			
+		}else if(currentNode.left != null && currentNode.right ==null)
+		{
+			lastNode = convert(currentNode.left,lastNode);
+			
+		}else if(currentNode.left == null && currentNode.right !=null)
+		{
+		
+			currentNode.left = currentNode.right;
+					
+		}else
 		{
 			lastNode = currentNode;
-		}		
-		if(rightNode != null)
-		{
-			lastNode.left = rightNode;
-//			rightNode.right = lastNode;
-			lastNode = rightNode;
 		}
 		
 		return lastNode;
-		
 	}
 	
-	public static void getRight(TreeNode treeNode)
-	{
-		TreeNode result  = treeNode;
-		if(result != null && result.left != null)
-		{
-			result.left.right = result;
-			getRight(result.left);
-		}
-		
-	}
 	
 	
 	public static void print(TreeNode treeNode)
