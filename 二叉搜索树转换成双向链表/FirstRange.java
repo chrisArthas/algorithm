@@ -10,21 +10,15 @@ public class FirstRange {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TreeNode treeNode = new TreeNode(10,new TreeNode(6,new TreeNode(4,null,null),new TreeNode(8,new TreeNode(7,null,null),new TreeNode(9,new TreeNode(31,null,null),null))),new TreeNode(14,new TreeNode(12,null,null),new TreeNode(16,null,null)));
-		convert(treeNode,null);
+		convert(treeNode);
 		print(treeNode);
 	
 	}
 	
 	
-	/**
-	 * ตÝน้  
-	 * @param root
-	 * @param lastNode
-	 * @return
-	 */
-	public static TreeNode convert(TreeNode root,TreeNode lastNode)
+	public static TreeNode convert(TreeNode currentNode)
 	{
-		TreeNode currentNode = root;
+		TreeNode lastNode = null;
 		if(currentNode == null)
 		{
 			return lastNode;
@@ -32,16 +26,16 @@ public class FirstRange {
 		
 		if(currentNode.left != null && currentNode.right != null)
 		{
-			lastNode = convert(currentNode.left,lastNode);
+			lastNode = convert(currentNode.left);
 						
 			lastNode.left = currentNode.right;
 			
-			lastNode = convert(currentNode.right,lastNode);
+			lastNode = convert(currentNode.right);
 
 			
 		}else if(currentNode.left != null && currentNode.right ==null)
 		{
-			lastNode = convert(currentNode.left,lastNode);
+			lastNode = convert(currentNode.left);
 			
 		}else if(currentNode.left == null && currentNode.right !=null)
 		{
