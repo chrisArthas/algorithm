@@ -58,8 +58,10 @@ public class TwoNodeTree {
 		root.setLeft(leftNode);
 		root.setRight(rightNode);
 		/**
-		 * 获取根节点在中序遍历中的位置
-		 * 左边都为左子树节点、右边都为右子树节点，然后递归
+		 * 获取根节点在中序遍历中的位置 position
+		 * 在中序遍历中 根节点左边都为左子树节点、根节点右边都为右子树节点，然后递归
+		 * 
+		 * 先序遍历中 根节点在第一个，后面的position +1 数量的 节点都为左子树节点 position+1 位置之后的节点都为右子树节点
 		 */
 		int position = middle.indexOf(first.get(0));
 		if(middle != null && middle.size() > position && first != null)
